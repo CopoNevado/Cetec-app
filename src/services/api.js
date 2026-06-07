@@ -14,21 +14,40 @@ export async function getCharacters() {
 
     const data = await response.json();
 
-    const pokemons = data.results.map((pokemon) => {
+    const pokemons = await Promise.all(
+      data.results.map(async (pokemon) => {
 
-      const id = pokemon.url
-        .split("/")
-        .filter(Boolean)
-        .pop();
+        const id = pokemon.url
+          .split("/")
+          .filter(Boolean)
+          .pop();
 
-      return {
-        id,
-        name: pokemon.name,
-        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
-        species: "Pokémon"
-      };
+        try {
+          const detailResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+          const detailData = await detailResponse.json();
 
-    });
+          return {
+            id,
+            name: pokemon.name,
+            image: detailData.sprites.other?.["official-artwork"]?.front_default || 
+                   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+            species: "Pokémon",
+            types: detailData.types.map(t => t.type.name),
+            generation: Math.ceil(id / 151)
+          };
+        } catch {
+          return {
+            id,
+            name: pokemon.name,
+            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+            species: "Pokémon",
+            types: [],
+            generation: Math.ceil(id / 151)
+          };
+        }
+
+      })
+    );
 
     return pokemons;
 
