@@ -9,20 +9,20 @@
 
 .filter-toggle {
   padding: 12px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #2c3e50;
   color: white;
-  border: none;
+  border: 1px solid #34495e;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .filter-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.6);
+  background: #34495e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .filter-panel {
@@ -31,7 +31,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,16 +60,17 @@
   max-width: 600px;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .filter-section h4 {
   margin: 0 0 16px 0;
-  color: #333;
+  color: #2c3e50;
   font-size: 18px;
+  font-weight: 600;
 }
 
-/* Tipos Grid */
+/* Types Grid */
 .types-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -79,7 +80,7 @@
 
 .type-btn {
   padding: 10px 12px;
-  border: 2px solid #ddd;
+  border: 1px solid #e5e5e5;
   border-radius: 6px;
   background: white;
   cursor: pointer;
@@ -90,16 +91,17 @@
 }
 
 .type-btn:hover {
-  transform: scale(1.05);
-  border-color: #667eea;
+  border-color: #2c3e50;
+  background: #f8f9fa;
 }
 
 .type-btn.active {
-  border-color: #667eea;
-  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  border-color: #2c3e50;
+  background: #2c3e50;
+  color: white;
 }
 
-/* Generación Grid */
+/* Generation Grid */
 .generation-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -109,7 +111,7 @@
 
 .generation-btn {
   padding: 12px;
-  border: 2px solid #ddd;
+  border: 1px solid #e5e5e5;
   border-radius: 6px;
   background: white;
   cursor: pointer;
@@ -120,17 +122,17 @@
 }
 
 .generation-btn:hover {
-  border-color: #667eea;
-  transform: scale(1.05);
+  border-color: #2c3e50;
+  background: #f8f9fa;
 }
 
 .generation-btn.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #2c3e50;
   color: white;
-  border-color: #667eea;
+  border-color: #2c3e50;
 }
 
-/* Acciones */
+/* Actions */
 .filter-actions {
   display: flex;
   gap: 12px;
@@ -152,21 +154,21 @@
 
 .reset-btn {
   background: #f0f0f0;
-  color: #333;
+  color: #2c3e50;
 }
 
 .reset-btn:hover {
-  background: #e0e0e0;
+  background: #e5e5e5;
 }
 
 .close-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #2c3e50;
   color: white;
 }
 
 .close-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  background: #34495e;
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.2);
 }
 
 /* Responsive */

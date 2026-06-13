@@ -1,70 +1,42 @@
-import { useState } from "react"
-import SearchBar from "../components/SearchBar"
-import AdvancedFilter from "../components/AdvancedFilter"
-import CharacterList from "../components/CharacterList"
-import Loader from "../components/Loader"
-import ErrorMessage from "../components/ErrorMessage"
-import useCharacters from "../hooks/useCharacters"
+import { useState } from "react";
+import SearchBar from "../components/SearchBar";
+import AdvancedFilter from "../components/AdvancedFilter";
+import CharacterList from "../components/CharacterList";
+import Loader from "../components/Loader";
+import ErrorMessage from "../components/ErrorMessage";
+import useCharacters from "../hooks/useCharacters";
+import { CharacterController } from "../controllers/CharacterController";
 
 function Home() {
+  const { characters, loading, error } = useCharacters();
+  const [search, setSearch] = useState("");
+  const [filters, setFilters] = useState({ types: [], generation: "" });
 
-    const {
-        characters,
-        loading,
-        error
-    } = useCharacters()
+  const controller = new CharacterController(null);
+  const filteredCharacters = controller.filterCharacters(
+    characters,
+    search,
+    filters
+  );
 
-    const [search, setSearch] = useState("")
-    const [filters, setFilters] = useState({ types: [], generation: "" })
+  if (loading) {
+    return <Loader />;
+  }
 
-    const filteredCharacters = characters.filter(character => {
-        // Filtro por búsqueda
-        const matchesSearch = character.name
-            .toLowerCase()
-            .includes(search.toLowerCase())
+  if (error) {
+    return <ErrorMessage message={error} />;
+  }
 
-        // Filtro por tipo
-        const matchesType = filters.types.length === 0 || 
-            (character.types && character.types.some(type => 
-                filters.types.includes(type)
-            ))
-
-        // Filtro por generación
-        const matchesGeneration = !filters.generation || 
-            character.generation === parseInt(filters.generation)
-
-        return matchesSearch && matchesType && matchesGeneration
-    })
-
-    if (loading) {
-        return <Loader />
-    }
-
-    if (error) {
-        return (
-            <ErrorMessage
-                message={error}
-            />
-        )
-    }
-
-    return (
-        <>
-            <SearchBar
-                search={search}
-                setSearch={setSearch}
-            />
-
-            <AdvancedFilter
-                onFilterChange={setFilters}
-                totalPokemons={characters.length}
-            />
-
-            <CharacterList
-                characters={filteredCharacters}
-            />
-        </>
-    )
+  return (
+    <>
+      <SearchBar search={search} setSearch={setSearch} />
+      <AdvancedFilter
+        onFilterChange={setFilters}
+        totalPokemons={characters.length}
+      />
+      <CharacterList characters={filteredCharacters} />
+    </>
+  );
 }
 
-export default Home
+export default Home;

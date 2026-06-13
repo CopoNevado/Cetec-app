@@ -1,28 +1,14 @@
-function SearchBar({
-
-search,
-setSearch
-
-}){
-
-return(
-
-<input
-className="search"
-type="text"
-placeholder="Buscar..."
-value={search}
-onChange={(e)=>
-
-setSearch(
-e.target.value
-)
-
-}
-/>
-
-)
-
+function SearchBar({ search, setSearch }) {
+  return (
+    <input
+      className="search"
+      type="text"
+      placeholder="Buscar Pokémon..."
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+      aria-label="Buscar"
+    />
+  );
 }
 
-export default SearchBar
+export default SearchBar;
